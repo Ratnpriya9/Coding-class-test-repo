@@ -18,3 +18,20 @@ dosage %>%
     title = "Relationship between drug dosage and weight lost"
   )
   
+
+
+dosage %>%
+  mutate(dose_mg = drug_dose_g * 10000) %>%
+  mutate(percent_wl = (weight_lost_g/initial_weight_g) * 100) %>%
+  ggplot(aes(x = dose_mg, y = percent_wl, colour = mouse_strain)) +
+  geom_point() +
+  scale_colour_manual(values = c("#ab2929", "#73b7bd", "#ccd65c")) +
+  theme_classic() +
+  labs(
+    x = "Drug dosage (mg)",
+    y = "Weight lost (mg)",
+    colour = "Mouse strain",
+    title = "Relationship between drug dosage and weight lost"
+  ) +
+  facet_wrap(~sex)
+  )
