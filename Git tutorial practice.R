@@ -1,0 +1,20 @@
+library(tidyverse)
+
+
+# you can read in files from the internet by providing the URL to them instead of a file path on your computer
+dosage <- read_csv("https://raw.githubusercontent.com/WEHI-Education/BIOL90042_R_Course/refs/heads/main/data/mousezempic_dosage_data.csv")
+
+
+dosage %>%
+  mutate(dose_mg = drug_dose_g * 10000) %>%
+  ggplot(aes(x = dose_mg, y = weight_lost_g, colour = mouse_strain)) +
+  geom_point() +
+  scale_colour_manual(values = c("#ab2929", "#73b7bd", "#ccd65c")) +
+  theme_classic() +
+  labs(
+    x = "Drug dosage (mg)",
+    y = "Weight lost (mg)",
+    colour = "Mouse strain",
+    title = "Relationship between drug dosage and weight lost"
+  )
+  
